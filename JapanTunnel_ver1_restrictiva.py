@@ -11,6 +11,8 @@ NORTH = "south"
 
 NCARS = 10
 
+#Esta solución es la más restrictiva. Sólo un coche puede usar el tunel por vez. 
+
 class Monitor():
     def __init__(self):
         self.mutex = Lock()
