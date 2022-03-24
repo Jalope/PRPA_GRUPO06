@@ -8,9 +8,9 @@ from multiprocessing import Value
 
 SOUTH = "north" 
 NORTH = "south" 
-MAXQUEUE = 3 #PAra evitar inanición ponemos un numero maximo de coches que están a la espera de acceder al túnel
-NCARS = 20
-
+MAXQUEUE = 2 #Para evitar inanición ponemos un numero maximo de coches que están a la espera de acceder al túnel
+NCARS = 50
+#Esta solución tiene deadlocke cuando la cola de ambos sentidos llega a valer simultaneamente MAXQUEUE
 class Monitor():
     def __init__(self):
 	
@@ -24,23 +24,23 @@ class Monitor():
         self.ns = Value('i',0)
     
     def are_north_free(self):
-    	return self.turn_South.value == 0 and self.queue_s.value < MAXQUEUE
+    	return ((self.turn_South.value == 0) and (self.queue_s.value < MAXQUEUE))
     
     def are_south_free(self):
-    	return self.turn_North.value == 0 and self.queue_n.value < MAXQUEUE
+    	return ((self.turn_North.value == 0) and (self.queue_n.value < MAXQUEUE))
 
     def wants_enter(self, direction):
         self.mutex.acquire()
         if direction == NORTH:
         	self.queue_n.value += 1
-        	print(self.queue_n.value,"coches en espera N")
+        	print(self.queue_n.value,"cars heading south waiting")
         	self.is_free.wait_for(self.are_north_free)
         	self.turn_North.value += 1
         	
         	#self.nn.value +=1
         else:
         	self.queue_s.value += 1
-        	print(self.queue_s.value,"coches en espera S")
+        	print(self.queue_s.value,"cars heading north waiting")
         	self.is_free.wait_for(self.are_south_free)
         	self.turn_South.value += 1
         	
