@@ -5,6 +5,7 @@ from multiprocessing import Value
 
 SOUTH = "north"
 NORTH = "south"
+MAXQUEUE = 5
 NCARS = 50
 # =============================================================================
 # Contamos los coches que hay en cola e imponemos que no pueda ser más larga que MAXQUEUE
@@ -21,10 +22,10 @@ class Monitor():
         self.queue_s = Value('i',0)
         
     def is_north_free(self):
-        return((self.turn_South.value == 0) and (self.queue_s.value < 5))
+        return((self.turn_South.value == 0) and (self.queue_s.value < MAXQUEUE))
     
     def is_south_free(self):
-        return((self.turn_North.value == 0) and (self.queue_n.value < 5))
+        return((self.turn_North.value == 0) and (self.queue_n.value < MAXQUEUE))
 
     def wants_enter(self, direction):
         self.mutex.acquire()
