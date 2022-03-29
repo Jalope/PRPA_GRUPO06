@@ -5,7 +5,7 @@ from multiprocessing import Value
 
 SOUTH = "north"
 NORTH = "south"
-MAXFLUX = 3
+MAXFLUX = 1
 NCARS = 50
 # =============================================================================
 # Cuando algún coche se pone en cola, contamos los coches que pasan en dirección contraria
