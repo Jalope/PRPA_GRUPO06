@@ -43,7 +43,7 @@ class Monitor():
                 self.count_cars_n.value = 0
                 self.is_free.notify_all() 
             self.queue_n.value += 1
-            print(self.queue_n.value, "cars quequeing north gate")
+            #print(self.queue_n.value, "cars quequeing north gate")
             self.is_free.wait_for(self.is_north_free)
             if self.queue_s.value > 0:
                 self.count_cars_n.value += 1
@@ -56,7 +56,7 @@ class Monitor():
                 self.count_cars_s.value = 0
                 self.is_free.notify_all()
             self.queue_s.value += 1
-            print(self.queue_n.value, "cars quequeing south gate")
+            #print(self.queue_n.value, "cars quequeing south gate")
             self.is_free.wait_for(self.is_south_free)
             if self.queue_n.value > 0:
                 self.count_cars_s.value += 1
