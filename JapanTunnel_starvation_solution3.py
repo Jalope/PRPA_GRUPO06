@@ -5,12 +5,15 @@ from multiprocessing import Value
 
 SOUTH = "north"
 NORTH = "south"
-MAXFLUX = 1
-NCARS = 50
+MAXFLUX = 10
+NCARS = 500
 # =============================================================================
-# Cuando algún coche se pone en cola, contamos los coches que pasan en dirección contraria
+# Usamos una constante MAXFLUX y dos variables booleanas que favorecen el paso en cada dirección.
+# Cuando algún coche se pone en cola, contamos los coches que pasan en dirección contraria y
 # cuando el numero de coches que han pasado superen MAXFLUX, cedemos el turno al otro lado
-# Sin deadlocke, sin inanición
+# Podemos imponer en la precondición del programa que MAXFLUX sea positiva y menor que 
+# el número total de coches. La variable turno también se torna disponible cunado el túnel se queda vacío
+# Sin deadlocke, sin inanición (en principio)
 # =============================================================================
 class Monitor():
     def __init__(self):
@@ -34,7 +37,6 @@ class Monitor():
     def wants_enter(self, direction):
         self.mutex.acquire()
         if direction == NORTH:
-            
             if self.count_cars_n.value >= MAXFLUX:
                 self.turn_North.value = False
                 self.turn_South.value = True
@@ -48,14 +50,13 @@ class Monitor():
             self.cars_n.value += 1
             self.queue_n.value -= 1
         else:
-            
             if self.count_cars_s.value >= MAXFLUX:
                 self.turn_North.value = True
                 self.turn_South.value = False
                 self.count_cars_s.value = 0
                 self.is_free.notify_all()
             self.queue_s.value += 1
-            print(self.queue_s.value, "cars quequeing south gate")
+            print(self.queue_n.value, "cars quequeing south gate")
             self.is_free.wait_for(self.is_south_free)
             if self.queue_n.value > 0:
                 self.count_cars_s.value += 1
@@ -92,7 +93,6 @@ def car(cid, direction, monitor):
     print(f"car {cid} heading {direction} leaving the tunnel")
     monitor.leaves_tunnel(direction)
     print(f"car {cid} heading {direction} out of the tunnel")
-
 
 
 def main():
