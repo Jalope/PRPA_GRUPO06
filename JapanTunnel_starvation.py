@@ -8,8 +8,9 @@ from multiprocessing import Value
 
 SOUTH = "north" #0
 NORTH = "south" #1
-
 NCARS = 100
+
+#Solución a partir del invariante, tiene inanición.
 
 class Monitor():
     def __init__(self):
