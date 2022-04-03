@@ -1,0 +1,16 @@
+Diferentes soluciones propuestas: 
+
+	1) JapanTunnel_starvation.py -->  Solución a partir del invariante, tiene inanición.
+	
+	2) JapanTunnel_Starvation_solution1.py --> Contamos los coches que hay en cola e imponemos que no pueda ser más larga que MAXQUEUE. Puede tener deadlocke si ambas colas superan MAXQUEUE al mismo tiempo. Puede tener inanición si nunca se ponen la cola más de MAXQUEUE coches
+	
+	3) JapanTunnel_Starvation_solution1v2.py --> Contamos los coches que hay en cola e imponemos que no pueda ser más larga que MAXQUEUE. Puede tener deadlocke si ambas colas superan MAXQUEUE al mismo tiempo. Puede tener inanición si nunca se ponen la cola más de MAXQUEUE coches
+	
+	4) JapanTunnel_Starvation_solution2.py --> Contamos los coches que hay en cola e imponemos que no pueda ser más larga que MAXQUEUE. Además añadimos una variable turno para cada dirección que dará preferencia a la cola que supere MAXQUEUE. Sin deadlocke, puede tener inanición si la cola no alcanza MAXQUEUE
+
+    5) JapanTunnel_Starvation_solution3.py --> # Usamos una constante MAXFLUX y dos variables booleanas que favorecen el paso en cada dirección. Cuando algún coche se pone en cola, contamos los coches que pasan en dirección contraria y cuando el numero de coches que han pasado superen MAXFLUX, cedemos el turno al otro lado. Podemos imponer en la precondición del programa que MAXFLUX sea positiva y menor que el número total de coches. La variable turno también se torna disponible cunado el túnel se queda vacío. Sin deadlocke, sin inanición (en principio)
+    
+    6) JapanTunnel_ver1_restrictiva.py--> Esta solución es la más restrictiva. Sólo un coche puede usar el tunel por vez. 
+    
+    7) JapanTunnel_ver_2.py --> Esta solución es la más restrictiva. Sólo un coche puede usar el tunel por vez.
+
