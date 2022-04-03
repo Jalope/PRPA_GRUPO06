@@ -6,7 +6,7 @@ from multiprocessing import Value
 SOUTH = "north"
 NORTH = "south"
 MAXQUEUE = 5
-NCARS = 50
+NCARS = 100
 # =============================================================================
 # Contamos los coches que hay en cola e imponemos que no pueda ser más larga que MAXQUEUE
 # Puede tener deadlocke si ambas colas superan MAXQUEUE al mismo tiempo
