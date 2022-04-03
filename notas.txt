@@ -12,5 +12,5 @@ Diferentes soluciones propuestas:
     
     6) JapanTunnel_ver1_restrictiva.py--> Esta solución es la más restrictiva. Sólo un coche puede usar el tunel por vez. 
     
-    7) JapanTunnel_ver_2.py --> Esta solución es la más restrictiva. Sólo un coche puede usar el tunel por vez.
+    7) JapanTunnel_ver_2.py --> Esta solución es la más restrictiva. Sólo un coche puede usar el tunel por vez. (con deadlocke)
 
